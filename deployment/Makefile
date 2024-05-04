@@ -1,0 +1,2 @@
+generate:
+	kcl deployment.k
