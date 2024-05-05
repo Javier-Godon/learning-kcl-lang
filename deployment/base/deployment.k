@@ -1,5 +1,6 @@
 import docker_compose_spec.compose
 import docker_compose_spec.services
+import docker_compose_spec.volumes
 
 dockerCompose: compose.Compose {
     services: {
@@ -36,5 +37,13 @@ dockerCompose: compose.Compose {
             }
         }
         
+    }
+    volumes: {
+        "postgres": volumes.VolumeTopLevel {
+            name: "postgres"
+        }
+        "hazelcast": volumes.VolumeTopLevel {
+            name: "hazelcast"
+        }
     }
 }

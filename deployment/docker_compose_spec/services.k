@@ -12,7 +12,7 @@ schema ServiceTopLevel:
     platform?: str
     ports?: [Port]
     profiles?: [Profile]
-    pull_policy: "allways" | "never" | "missing" | "build" = "missing"
+    pull_policy: "allways" | "never" | "if_not_present" | "build" = "if_not_present"
     restart: "no" | "always" | "on-failure" | "unless-stopped" = "no"
     volumes?: [Volume]
 
@@ -26,7 +26,7 @@ schema Port:
     published?: int | str
     """The Host IP mapping, unspecified means all network interfaces (0.0.0.0)."""
     host_ip?: str
-    protocol: "TCP" | "UDP" | "SCTP" = "TCP"
+    protocol: "tcp" | "udp" | "sctp" = "tcp"
     mode?: "host" | "ingress" = "ingress"
     name?: str
 

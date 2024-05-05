@@ -1,0 +1,39 @@
+services:
+  postgres:
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_HOST: postgres
+    image: postgres:16.2
+    ports:
+    - target: 5432
+      published: 5432
+      protocol: tcp
+      mode: ingress
+    pull_policy: if_not_present
+    restart: 'no'
+    volumes:
+    - type: volume
+      source: './postgres'
+      target: /var/lib/postgresql/data
+  hazelcast:
+    environment:
+      HZ_CLUSTERNAME: dob
+    image: hazelcast/hazelcast@sha256:bc0830a073cc024ad47aae79d173e22a48e8824934b05fe611b98076142d9255
+    ports:
+    - target: 5701
+      published: 5701
+      protocol: tcp
+      mode: ingress
+    pull_policy: if_not_present
+    restart: 'no'
+    volumes:
+    - type: volume
+      source: './hazelcast'
+      target: /opt/hazelcast/CLASSPATH_EXT
+volumes:
+  postgres:
+    name: postgres
+  hazelcast:
+    name: hazelcast
